@@ -35,20 +35,20 @@ final class ItemListCell: UICollectionViewListCell {
 //		}
 //		contentConfiguration = listContentConfiguration
 
-		contentConfiguration = TextContentConfiguration().updated(for: state)
+		contentConfiguration = ItemContentConfiguration().updated(for: state)
 	}
 }
 
-private struct TextContentConfiguration: UIContentConfiguration {
+private struct ItemContentConfiguration: UIContentConfiguration {
 	var description: String?
 	var color: UIColor?
 	var indentation: CGFloat = 0
 
 	func makeContentView() -> any UIView & UIContentView {
-		TextContentView(configuration: self)
+		ItemContentView(configuration: self)
 	}
 
-	func updated(for state: any UIConfigurationState) -> TextContentConfiguration {
+	func updated(for state: any UIConfigurationState) -> ItemContentConfiguration {
 		var updated = self
 		guard let item = state.item else { return updated }
 		updated.description = item.description
@@ -60,17 +60,17 @@ private struct TextContentConfiguration: UIContentConfiguration {
 	}
 }
 
-private final class TextContentView: UIView, UIContentView {
+private final class ItemContentView: UIView, UIContentView {
 	var configuration: any UIContentConfiguration {
 		didSet {
-			guard let configuration = configuration as? TextContentConfiguration else { return }
+			guard let configuration = configuration as? ItemContentConfiguration else { return }
 			apply(configuration: configuration)
 		}
 	}
 
 	private var listContentView: UIListContentView
 
-	init(configuration: TextContentConfiguration) {
+	init(configuration: ItemContentConfiguration) {
 		listContentView = UIListContentView(configuration: .cell())
 		self.configuration = configuration
 		super.init(frame: .zero)
@@ -91,7 +91,7 @@ private final class TextContentView: UIView, UIContentView {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	private func apply(configuration: TextContentConfiguration) {
+	private func apply(configuration: ItemContentConfiguration) {
 		var listContentConfiguration = UIListContentConfiguration.cell()
 		listContentConfiguration.text = configuration.description
 		listContentConfiguration.textProperties.color = configuration.color ?? .label
