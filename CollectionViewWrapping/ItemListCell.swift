@@ -25,17 +25,17 @@ final class ItemListCell: UICollectionViewListCell {
 	}
 
 	override func updateConfiguration(using state: UICellConfigurationState) {
-		var listContentConfiguration = UIListContentConfiguration.cell()
-		if let item = state.item {
-			listContentConfiguration.text = item.description
-			if item.isIndented {
-				listContentConfiguration.textProperties.color = .systemOrange
-				listContentConfiguration.directionalLayoutMargins.leading += 200
-			}
-		}
-		contentConfiguration = listContentConfiguration
+//		var listContentConfiguration = UIListContentConfiguration.cell()
+//		if let item = state.item {
+//			listContentConfiguration.text = item.description
+//			if item.isIndented {
+//				listContentConfiguration.textProperties.color = .systemOrange
+//				listContentConfiguration.directionalLayoutMargins.leading += 200
+//			}
+//		}
+//		contentConfiguration = listContentConfiguration
 
-//		contentConfiguration = TextContentConfiguration().updated(for: state)
+		contentConfiguration = TextContentConfiguration().updated(for: state)
 	}
 }
 
